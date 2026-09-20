@@ -36,7 +36,7 @@ const BankDetailsDTOSchema = z.object({
   accountHolder: z.string({ error: "Account holder is required" }),
   direction: z.enum([ "in", "out" ], { error: "Direction is required" }),
   accountNo: z.string({ error: "Account number is required" }),
-  amount: z.number()
+  amount: z.number(),
 });
 
 const DigitalDetailsDTOSchema = z.object({
@@ -44,40 +44,36 @@ const DigitalDetailsDTOSchema = z.object({
   accountHolder: z.string({ error: "Account holder is required" }),
   direction: z.enum([ "in", "out" ], { error: "Direction is required" }),
   accountNo: z.string({ error: "Account number is required" }),
-  amount: z.number()
+  amount: z.number(),
 });
 
 const BankPaymentSchema = z.object({
   method: z.literal("bank"),
-  status: z.enum([ 'success', 'refund' ]),
-  orderId: z.uuid(),
-  discount: z.number().optional(),
-  amount: z.number({ error: "Amount is required" }),
   bankDetails: BankDetailsDTOSchema,
 });
 
 const DigitalPaymentSchema = z.object({
   method: z.literal("digital"),
-  orderId: z.uuid(),
-  status: z.enum([ 'success', 'refund' ]),
-  discount: z.number().optional(),
-  amount: z.number({ error: "Amount is required" }),
   digitalDetails: DigitalDetailsDTOSchema,
 });
 
-const CashDTOSchema = z.object({
+const CashPaymentSchema = z.object({
   method: z.literal("cash"),
-  orderId: z.uuid(),
-  discount: z.number().optional(),
-  status: z.enum([ 'success', 'refund' ]),
-  amount: z.number({ error: "Amount is required" }),
 });
 
-export const PaymentDTOSchema = z.discriminatedUnion("method", [
+const PaymentMethodSchema = z.discriminatedUnion("method", [
   BankPaymentSchema,
   DigitalPaymentSchema,
-  CashDTOSchema,
+  CashPaymentSchema,
 ]);
+
+export const PaymentDTOSchema = z.object({
+  orderId: z.uuid(),
+  discount: z.number().optional(),
+  status: z.enum([ "success", "refund" ]),
+  amount: z.number({ error: "Amount is required" }), // total order amount
+  payment: z.array(PaymentMethodSchema).min(1),
+});
 export type PaymentDTO = z.infer<typeof PaymentDTOSchema>
 /*payment schema end*/
 
@@ -96,3 +92,17 @@ export const SupplierSlipDTOSchema = z.object({
   })
 })
 export type SupplierSlipDTO = z.infer<typeof SupplierSlipDTOSchema>
+
+/* deposit dto */
+
+export const DepositDTOSchema = z.object({
+  orderId: z.uuid().optional(),
+  customerId: z.uuid().optional(),
+  discount: z.number().optional(),
+  amount: z.number(),
+  status: z.enum([ "success", "refund" ]),
+  payment: z.array(PaymentMethodSchema).min(1),
+}).refine((data) => (data.customerId?.trim() || data.orderId?.trim()), {
+  message: "Either customerId or orderId is required",
+})
+export type DepositDTO = z.infer<typeof DepositDTOSchema>

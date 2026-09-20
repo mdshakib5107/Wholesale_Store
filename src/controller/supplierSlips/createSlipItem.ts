@@ -9,7 +9,7 @@ type Item = {
   productId: string
 }[]
 export const createSlipItem = async (tx: DBTransaction, items: Item) => {
-  console.log(items);
+
   const insertedSlipItem = await tx.insert(supplierSlipItems).values(items).returning()
   if (insertedSlipItem.length === 0) throw new Error("insert  slip item failed")
 }

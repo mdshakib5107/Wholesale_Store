@@ -33,8 +33,8 @@ export const placeOrder = async (data: OrderDTO) => {
     const insertOrderItem = await tx.insert(orderItems).values(orderData).returning()
     if (insertOrderItem.length === 0) throw new Error("insert order item failed")
     await supplierSlipController.createSlipItem(tx, slipItems)
-    const [ updateOrder ] = await tx.update(orders).set({ totalAmount }).where(eq(orders.orderId, insertedOrder.orderId)).returning()
-
+    const [ updateOrder ] = await tx.update(orders).set({ totalAmount, due: totalAmount }).where(eq(orders.orderId, insertedOrder.orderId)).returning()
+    await stakeholderController.updateCustomerTotalAmount(tx, customerId, totalAmount)
     return {
       orderitemData: insertOrderItem,
       orderData: updateOrder
