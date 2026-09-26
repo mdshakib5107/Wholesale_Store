@@ -42,7 +42,8 @@ export const slipPayment = async (data: SupplierPaymentDTO) => {
     /* upate supplier */
     const totalDue = dueSlips.reduce((a, i) => a += Number(i.due), 0)
     const excess = data.amount - totalDue
-    const updatedSuppier = await supplierController.updateSupplier(tx, supplierId, { totalDue: totalDue < data.amount ? 0 : -data.amount, ...(excess && { totalExcess: excess }) })
+    console.log(excess);
+    const updatedSuppier = await supplierController.updateSupplier(tx, supplierId, { totalDue: totalDue < data.amount ? 0 : -data.amount, ...(excess > 0 && { totalExcess: excess }) })
     return updatedSuppier
   });
   return payment
