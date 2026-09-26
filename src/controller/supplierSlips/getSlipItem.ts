@@ -3,7 +3,7 @@ import { db } from '@/db/index';
 import { products, suppliers, users, supplierSlipItems } from '@/db/schema/index';
 import { eq, and } from 'drizzle-orm';
 import { NotFoundError } from '@/helpers/customErrors'
-interface SupplierData {
+export interface SupplierData {
   supplierName: string,
   gariNo: number
 }

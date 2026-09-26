@@ -1,7 +1,7 @@
 import { DBTransaction } from "@/db/types";
 import { supplierSlips } from '@/db/schema/index';
 import { eq } from 'drizzle-orm'
-interface UpdateSlipData {
+export interface UpdateSlipData {
   netAmount: number;
   totalQuantity: number;
   totalExpense: number;

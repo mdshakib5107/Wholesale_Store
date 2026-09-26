@@ -4,7 +4,7 @@ import mainRoute from './route/mainRoute'
 import 'dotenv/config'
 import { errorHandler } from './helpers/errorHandler'
 import { Request, Response, NextFunction } from 'express';
-import { NotFoundError } from './helpers/customErrors.ts'
+import { NotFoundError } from './helpers/customErrors'
 import { db } from '@/db/index'
 const app = express()
 

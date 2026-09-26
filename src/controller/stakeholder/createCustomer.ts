@@ -3,7 +3,7 @@ import { users, customers } from '@/db/schema/index';
 import { ServerError } from '@/helpers/customErrors';
 import { eq } from 'drizzle-orm';
 import { createUser } from './createUser'
-interface UserData {
+export interface UserData {
   name: string;
   phone: string;
   address: string;

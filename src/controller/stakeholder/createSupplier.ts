@@ -2,7 +2,7 @@ import { db } from '@/db/index';
 import { users, suppliers } from '@/db/schema/index';
 import { ServerError } from '@/helpers/customErrors';
 import { eq } from 'drizzle-orm';
-interface UserData {
+export interface UserData {
   name: string, phone: string, address: string
 }
 export const createSupplier = async (data: UserData) => {
