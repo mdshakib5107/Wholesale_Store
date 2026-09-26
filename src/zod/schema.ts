@@ -106,3 +106,14 @@ export const DepositDTOSchema = z.object({
   message: "Either customerId or orderId is required",
 })
 export type DepositDTO = z.infer<typeof DepositDTOSchema>
+export const SupplierPaymentDTOSchema = z.object({
+  supplierSlipId: z.uuid().optional(),
+  supplierId: z.uuid().optional(),
+  discount: z.number().optional(),
+  amount: z.number(),
+  status: z.enum([ "success", "refund" ]),
+  payment: z.array(PaymentMethodSchema).min(1),
+}).refine((data) => (data.supplierId?.trim() || data.supplierSlipId?.trim()), {
+  message: "Either customerId or orderId is required",
+})
+export type SupplierPaymentDTO = z.infer<typeof SupplierPaymentDTOSchema>

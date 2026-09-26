@@ -21,8 +21,10 @@ export const placeOrder = async (data: OrderDTO) => {
     const orderData = await Promise.all(data.orderItems.map(async (item: any) => {
       const price = item.price + 2
       const productId = await productController.findProduct({ supplierName: item.supplierName, gariNo: item.gariNo });
-      const supplierSlipId = await supplierSlipController.findSupplierSlip(tx, productId)
+      const supplierSlip = await supplierSlipController.findSupplierSlip({ tx, productId })
         ;
+      const supplierSlipId = supplierSlip?.supplierSlipId;
+      if (supplierSlip?.isCompleted == true) throw new Error("supplierSlip Already complete");
       slipItems.push({ size: item.size, quantity: item.quantity, price: item.price, total: item.quantity * item.price, supplierSlipId: supplierSlipId!, productId: productId! })
       return { size: item.size, quantity: item.quantity, price, total: item.quantity * price, orderId: insertedOrder?.orderId!, productId: productId! }
     })

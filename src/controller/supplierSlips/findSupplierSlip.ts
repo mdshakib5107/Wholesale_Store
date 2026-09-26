@@ -1,13 +1,34 @@
 import { DBTransaction } from '@/db/types'
 import { supplierSlips } from '@/db/schema/index'
 import { NotFoundError } from '@/helpers/customErrors'
-import { eq } from 'drizzle-orm'
-export const findSupplierSlip = async (tx: DBTransaction, productId: string) => {
-  const [ supplierSlip ] = await tx.select({ supplierSlipId: supplierSlips.supplierSlipId }).from(supplierSlips).where(eq(supplierSlips.productId, productId))
+import { and, eq } from 'drizzle-orm'
+type Data = {
+  tx: DBTransaction,
+  productId?: string | undefined,
+  supplierSlipId?: string | undefined,
+}
+export const findSupplierSlip = async (data: Data) => {
+  if (data.productId) {
+    const [ supplierSlip ] = await data.tx.select().from(supplierSlips).where(eq(supplierSlips.productId, data.productId))
 
 
-  //console.log(supplierSlip);
-  if (!supplierSlip) throw new NotFoundError("supplierSlip not found")
 
-  return supplierSlip.supplierSlipId
+    if (!supplierSlip) throw new NotFoundError("supplierSlip not found")
+
+    return supplierSlip
+  }
+  if (data.supplierSlipId) {
+    const [ supplierSlip ] = await data.tx.select().from(supplierSlips).where(
+      and(
+        eq(supplierSlips.supplierSlipId, data.supplierSlipId),
+        eq(supplierSlips.isCompleted, true)
+      )
+    )
+
+
+
+    if (!supplierSlip) throw new NotFoundError("supplierSlip not found")
+
+    return supplierSlip
+  }
 }
