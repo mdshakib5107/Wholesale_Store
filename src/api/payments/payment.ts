@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { PaymentDTOSchema } from '@/zod/schema'
+import { PaymentDTOSchema } from '@/zods/schema'
 import { zodErrorResponse } from '@/helpers/zodErrorResponse'
 import { paymentController } from '@/controller/payments/index'
 export const payment = async (req: Request, res: Response, next: NextFunction) => {

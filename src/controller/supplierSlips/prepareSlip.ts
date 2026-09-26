@@ -2,7 +2,7 @@ import { db } from '@/db/index';
 import { supplierSlipItems, supplierSlips } from '@/db/schema/index';
 import { sum, eq } from 'drizzle-orm';
 import { productController } from '@/controller/products/index'
-import { SupplierSlipDTO } from '@/zod/schema';
+import { SupplierSlipDTO } from '@/zods/schema';
 import { findSupplierSlip } from './findSupplierSlip'
 import { createSupplierExpense } from './supplierExpense'
 import { supplierController } from '@/controller/stakeholder/suppliers/index'

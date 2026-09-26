@@ -1,6 +1,6 @@
 
 import { Request, Response, NextFunction } from 'express';
-import { OrderDTOSchema } from '@/zod/schema';
+import { OrderDTOSchema } from '@/zods/schema';
 import { orderController } from "@/controller/orders/index"
 export const placeOrder = async (req: Request, res: Response, next: NextFunction) => {
 

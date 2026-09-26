@@ -1,4 +1,4 @@
-import { OrderDTO } from '@/zod/schema';
+import { OrderDTO } from '@/zods/schema';
 import { db } from '@/db/index';
 import { sql, eq } from 'drizzle-orm'
 import { supplierSlipController } from '../supplierSlips/index'

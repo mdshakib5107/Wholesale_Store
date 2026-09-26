@@ -1,6 +1,6 @@
 import { db } from '@/db/index';
 import { payments } from '@/db/schema/index';
-import { PaymentDTO } from '@/zod/schema'
+import { PaymentDTO } from '@/zods/schema'
 import { orderPayment } from './orderPayment'
 import { orderController } from '@/controller/orders/index'
 

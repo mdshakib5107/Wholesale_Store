@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { DepositDTOSchema } from '@/zod/schema'
+import { DepositDTOSchema } from '@/zods/schema'
 import { zodErrorResponse } from '@/helpers/zodErrorResponse';
 import { paymentController } from '@/controller/payments/index'
 export const deposits = async (req: Request, res: Response, next: NextFunction) => {

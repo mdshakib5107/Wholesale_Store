@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { SupplierSlipDTOSchema } from '@/zod/schema';
+import { SupplierSlipDTOSchema } from '@/zods/schema';
 import { zodErrorResponse } from "@/helpers/zodErrorResponse";
 import { supplierSlipController } from '@/controller/supplierSlips/index'
 export const prepareSlip = async (req: Request, res: Response, next: NextFunction) => {

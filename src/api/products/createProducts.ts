@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { zodErrorResponse } from '@/helpers/zodErrorResponse';
-import { ProductDTOSchema } from '@/zod/schema';
+import { ProductDTOSchema } from '@/zods/schema';
 import { productController } from '@/controller/products/index'
 export const createProduct = async (req: Request, res: Response, next: NextFunction) => {
   try {

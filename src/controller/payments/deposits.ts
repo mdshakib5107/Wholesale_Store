@@ -1,6 +1,6 @@
 import { db } from '@/db/index';
 import { payments, paymentAllocation } from '@/db/schema/index';
-import { DepositDTO } from '@/zod/schema';
+import { DepositDTO } from '@/zods/schema';
 import { addBankDetails } from './addBankDetails'
 import { addDigitalDetails } from './addDigitalDetails'
 import { allocateAmount } from '@/controller/orders/helpers/allocateAmount'

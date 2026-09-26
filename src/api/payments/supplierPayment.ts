@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { SupplierPaymentDTOSchema } from '@/zod/schema'
+import { SupplierPaymentDTOSchema } from '@/zods/schema'
 import { zodErrorResponse } from '@/helpers/zodErrorResponse'
 import { paymentController } from '@/controller/payments/index'
 

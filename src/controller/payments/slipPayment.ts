@@ -2,7 +2,7 @@ import { db } from '@/db/index';
 import { payments, paymentAllocation } from '@/db/schema/index';
 import { addBankDetails } from './addBankDetails'
 import { addDigitalDetails } from './addDigitalDetails'
-import { SupplierPaymentDTO } from '@/zod/schema';
+import { SupplierPaymentDTO } from '@/zods/schema';
 import { allocateSlipAmount } from '@/controller/supplierSlips/helpers/allocateSlipAmount'
 import { supplierSlipController } from '@/controller/supplierSlips/index'
 import { supplierController } from '@/controller/stakeholder/suppliers/index'

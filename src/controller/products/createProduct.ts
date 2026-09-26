@@ -2,7 +2,7 @@ import { db } from '@/db/index';
 import { eq, and } from 'drizzle-orm'
 import { suppliers, users, products, supplierSlips } from '@/db/schema/index';
 import { stakeholderController } from '@/controller/stakeholder/index'
-import { ProductDTO } from '@/zod/schema'
+import { ProductDTO } from '@/zods/schema'
 import { BadRequestError } from '@/helpers/customErrors'
 export const createProducts = async (data: ProductDTO) => {
 
